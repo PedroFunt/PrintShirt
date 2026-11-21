@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arte e Personalização - PrintShirt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="topo">
+        <a href="index.html" class="logo">Print<span class="destaque">Shirt</span></a>
+        <div class="topo-acoes">
+            <nav id="menu-nav">
+                <a href="index.html">Início</a>
+                <a href="produtos.html">Produtos</a>
+                <a href="arte.html" class="ativo">Arte</a>
+                <a href="index.html#como-funciona">Como Funciona</a>
+                <a href="#contato">Contato</a>
+            </nav>
+            <button type="button" class="btn-tema" id="btn-tema" aria-label="Alternar modo escuro" title="Modo Noturno">
+                <span id="icone-tema">&#9790;</span>
+            </button>
+            <button type="button" class="btn-carrinho" id="btn-carrinho" aria-label="Abrir carrinho">
+                <span class="carrinho-icone">&#128722;</span>
+                <span class="carrinho-contador" id="carrinho-contador">0</span>
+            </button>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+        </div>
+    </div>
+</header>
+
+<div class="hero">
+    <div class="hero-conteudo">
+        <h2>Área de Arte e Personalização</h2>
+        <p>Envie sua arte pronta ou encomende um design exclusivo desenvolvido sob medida para sua ideia.</p>
+        <div class="hero-botoes">
+            <a href="produtos.html" class="btn">Ver Produtos</a>
+            <a href="index.html" class="btn btn-secundario">Voltar ao Início</a>
+        </div>
+    </div>
+</div>
+
+<div class="diferenciais">
+    <div class="diferenciais-grid">
+        <div class="diferencial-item"><span class="diferencial-icone">&#10003;</span> Suporte a Vetores e PNG</div>
+        <div class="diferencial-item"><span class="diferencial-icone">&#10003;</span> Prévia Digital Grátis</div>
+        <div class="diferencial-item"><span class="diferencial-icone">&#10003;</span> Ajustes Pré-impressão</div>
+    </div>
+</div>
+
+<section id="arte-opcoes">
+    <div class="container arte-container">
+        <h2 class="secao-titulo">Sua Arte do Seu Jeito</h2>
+        <p class="secao-subtitulo">Escolha como prefere preparar a identidade do seu produto</p>
+
+        <div class="arte-grid">
+            <div class="arte-card">
+                <div>
+                    <div class="arte-icone">&#128194;</div>
+                    <h3>Já tenho minha arte</h3>
+                    <p>Envie seus arquivos prontos em alta resolução (PNG transparente, PDF, SVG ou AI) para estampar diretamente nas peças.</p>
+                </div>
+                <button type="button" class="btn" onclick="alert('Área de envio de arquivos preparada! Em breve você poderá fazer upload direto por aqui.')">Enviar Arquivos</button>
+            </div>
+
+            <div class="arte-card">
+                <div>
+                    <div class="arte-icone">&#127912;</div>
+                    <h3>Quero encomendar uma arte</h3>
+                    <p>Não tem um design pronto? Nossa equipe cria uma arte exclusiva baseada na sua referência, frase, logotipo ou evento.</p>
+                </div>
+                <a href="https://wa.me/5511987654321?text=Ol%C3%A1%21%20Gostaria%20de%20encomendar%20uma%20arte%20personalizada%20para%20meu%20pedido." target="_blank" class="btn btn-secundario">Solicitar Criação</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="modal-carrinho" class="modal-overlay">
+    <div class="modal-conteudo">
+        <button type="button" class="modal-fechar" id="btn-fechar-carrinho" aria-label="Fechar">&times;</button>
+        <h3>Meu Carrinho</h3>
+        <div id="carrinho-lista" class="carrinho-lista"></div>
+        <div class="carrinho-rodape">
+            <div class="carrinho-total-linha">
+                <span>Total:</span>
+                <span id="carrinho-total">R$ 0,00</span>
+            </div>
+            <div class="carrinho-aviso-pagamento">
+                Pagamento somente à vista. Projeto acadêmico sem gateway de pagamento integrado.
+            </div>
+            <button type="button" id="btn-finalizar-pedido" class="btn btn-bloco">Finalizar Pedido</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-orcamento" class="modal-overlay">
+    <div class="modal-conteudo">
+        <button type="button" class="modal-fechar" id="btn-fechar-modal" aria-label="Fechar">&times;</button>
+        <h3>Resumo do Pedido</h3>
+        <p class="modal-subtitulo">Mensagem gerada com os detalhes do carrinho:</p>
+        <textarea id="modal-texto" class="modal-textarea" readonly rows="8"></textarea>
+        <div class="modal-telefone">Telefone para contato: <strong>(11) 98765-4321</strong></div>
+        <div class="modal-botoes">
+            <button type="button" id="btn-copiar" class="btn">Copiar Mensagem</button>
+            <button type="button" id="btn-whatsapp" class="btn btn-secundario">Chamar no WhatsApp</button>
+        </div>
+    </div>
+</div>
+
+<section id="contato" class="contato">
+    <div class="container">
+        <div class="contato-caixa">
+            <h2 class="secao-titulo">Fale Conosco</h2>
+            <p class="secao-subtitulo">Tem um projeto especial ou quer tirar dúvidas sobre artes? Fale com a gente.</p>
+            <div class="contato-info">
+                <p>E-mail: contato@printshirt.com.br</p>
+                <p>Telefone: (11) 98765-4321</p>
+                <p>Atendimento: Segunda a Sexta, das 09h às 18h</p>
+                <p>Condição comercial: Pagamento somente à vista</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p><strong>PrintShirt</strong> - Produtos Personalizados</p>
+    <p>&copy; 2026 PrintShirt. Todos os direitos reservados.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

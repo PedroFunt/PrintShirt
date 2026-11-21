@@ -1,36 +1,118 @@
-let carrinho = [];
+let carrinho = JSON.parse(localStorage.getItem("carrinhoPrintShirt") || "[]");
 let produtoAtual = {
-    id: "basica",
-    nome: "Camiseta Básica Individual",
-    imagem: "assets/camiseta.jpg",
+    id: "empresas",
+    nome: "Empresas e Eventos",
+    imagem: "assets/camisetas-empresas.jpg",
     cor: "Preto",
     tamanho: "M",
-    quantidade: 1
+    quantidade: 5
 };
 
 const dadosProdutos = {
-    basica: {
-        nome: "Camiseta Básica Individual",
-        imagem: "assets/camiseta.jpg",
-        minQtd: 1,
-        padraoQtd: 1,
-        descricao: "1 camiseta 100% algodão penteado de alta qualidade, personalizada com sua arte, foto ou frase exclusiva."
-    },
-    kit: {
-        nome: "Kit 3 Camisetas Personalizadas",
-        imagem: "assets/camiseta3.jpg",
-        minQtd: 1,
-        padraoQtd: 1,
-        descricao: "Kit com 3 camisetas personalizadas por R$ 120,00 à vista (R$ 40,00 por camiseta). Perfeito para grupos e presentes."
-    },
     empresas: {
         nome: "Empresas e Eventos",
         imagem: "assets/camisetas-empresas.jpg",
         minQtd: 5,
         padraoQtd: 5,
-        descricao: "Preço promocional: Pedido mínimo de 5 camisas por R$ 40,00 cada. Cada camisa adicional acima de 5 custará apenas R$ 35,00. Ideal para equipes, empresas, equipes e formaturas."
+        descricao: "Preço promocional: Pedido mínimo de 5 camisas por R$ 40,00 cada. Cada camisa adicional acima de 5 custará apenas R$ 35,00. Ideal para equipes, empresas, eventos e formaturas."
+    },
+    basica: {
+        nome: "Camiseta Básica Individual",
+        imagem: "assets/camiseta.jpg",
+        minQtd: 1,
+        padraoQtd: 1,
+        descricao: "Camiseta 100% algodão penteado macio de alta qualidade, pronta para receber sua personalização com acabamento profissional."
+    },
+    moletom: {
+        nome: "Moletom Canguru Premium",
+        imagem: "assets/moletom.jpg",
+        minQtd: 1,
+        padraoQtd: 1,
+        descricao: "Moletom flanelado encorpado com capuz e bolso frontal canguru. Confortável, quentinho e perfeito para personalização."
+    },
+    oversized: {
+        nome: "Camiseta Oversized Streetwear",
+        imagem: "assets/oversized.jpg",
+        minQtd: 1,
+        padraoQtd: 1,
+        descricao: "Modelagem ampla streetwear em algodão 240g de alta gramatura, com ombros caídos e gola grossa canelada."
+    },
+    polo: {
+        nome: "Camisa Polo Tradicional",
+        imagem: "assets/polo.jpg",
+        minQtd: 1,
+        padraoQtd: 1,
+        descricao: "Camisa polo clássica em malha piquet estruturada e elegante. Ideal para uniformes corporativos e uso profissional."
+    },
+    regata: {
+        nome: "Regata Dry-Fit Esportiva",
+        imagem: "assets/regata.jpg",
+        minQtd: 1,
+        padraoQtd: 1,
+        descricao: "Regata em malha dry-fit respirável e de secagem rápida, com costuras reforçadas para treinos e atividades esportivas."
+    },
+    caneca: {
+        nome: "Caneca de Cerâmica",
+        imagem: "assets/caneca.jpg",
+        minQtd: 1,
+        padraoQtd: 1,
+        descricao: "Caneca branca resinada em cerâmica de alta qualidade, ideal para personalizar com logo, frases ou artes especiais."
+    },
+    taca: {
+        nome: "Taça de Gin Personalizada",
+        imagem: "assets/taca.jpg",
+        minQtd: 1,
+        padraoQtd: 1,
+        descricao: "Taça de gin em acrílico premium transparente com acabamento brilhante, perfeita para festas, celebrações e brindes."
+    },
+    copo: {
+        nome: "Copo Térmico com Tampa",
+        imagem: "assets/copo.jpg",
+        minQtd: 1,
+        padraoQtd: 1,
+        descricao: "Copo térmico em aço inoxidável com parede dupla e isolamento a vácuo, preservando a temperatura da sua bebida por horas."
     }
 };
+
+const precosUnitarios = {
+    basica: 45,
+    moletom: 119,
+    oversized: 59,
+    polo: 65,
+    regata: 42,
+    caneca: 35,
+    taca: 25,
+    copo: 69
+};
+
+const btnTema = document.getElementById("btn-tema");
+const iconeTema = document.getElementById("icone-tema");
+
+function aplicarTema(escuro) {
+    if (escuro) {
+        document.body.classList.add("modo-noturno");
+        if (iconeTema) {
+            iconeTema.innerHTML = "&#9728;";
+        }
+    } else {
+        document.body.classList.remove("modo-noturno");
+        if (iconeTema) {
+            iconeTema.innerHTML = "&#9790;";
+        }
+    }
+}
+
+const temaSalvo = localStorage.getItem("modoNoturnoPrintShirt") === "true";
+aplicarTema(temaSalvo);
+
+if (btnTema) {
+    btnTema.addEventListener("click", function() {
+        const modoAtual = document.body.classList.contains("modo-noturno");
+        const novoModo = !modoAtual;
+        aplicarTema(novoModo);
+        localStorage.setItem("modoNoturnoPrintShirt", novoModo);
+    });
+}
 
 const btnCarrinho = document.getElementById("btn-carrinho");
 const carrinhoContador = document.getElementById("carrinho-contador");
@@ -49,6 +131,7 @@ const modalProdImg = document.getElementById("modal-prod-img");
 const modalProdCor = document.getElementById("modal-prod-cor");
 const modalProdQtd = document.getElementById("modal-prod-qtd");
 const lblProdQtd = document.getElementById("lbl-prod-qtd");
+const gradeTamanho = document.getElementById("grade-tamanho");
 const btnsTamanho = document.querySelectorAll(".btn-tamanho");
 const btnAddCarrinho = document.getElementById("btn-add-carrinho");
 
@@ -67,10 +150,8 @@ function calcularPreco(prodId, quantidade) {
         const qtd = Math.max(5, quantidade);
         return (5 * 40) + ((qtd - 5) * 35);
     }
-    if (prodId === "kit") {
-        return 120 * quantidade;
-    }
-    return 45 * quantidade;
+    const unitario = precosUnitarios[prodId] || 45;
+    return unitario * quantidade;
 }
 
 function atualizarPrecoModal() {
@@ -88,12 +169,20 @@ function atualizarPrecoModal() {
 }
 
 function abrirModalProduto(prodId) {
-    const info = dadosProdutos[prodId] || dadosProdutos.basica;
+    const info = dadosProdutos[prodId] || dadosProdutos.empresas;
     produtoAtual.id = prodId;
     produtoAtual.nome = info.nome;
     produtoAtual.imagem = info.imagem;
     produtoAtual.cor = modalProdCor.value;
-    produtoAtual.tamanho = "M";
+
+    const ehBebida = prodId === "caneca" || prodId === "taca" || prodId === "copo";
+    if (ehBebida) {
+        if (prodId === "caneca") produtoAtual.tamanho = "325ml";
+        if (prodId === "taca") produtoAtual.tamanho = "580ml";
+        if (prodId === "copo") produtoAtual.tamanho = "473ml";
+    } else {
+        produtoAtual.tamanho = "M";
+    }
 
     modalProdNome.textContent = info.nome;
     modalProdDescricao.textContent = info.descricao;
@@ -103,7 +192,7 @@ function abrirModalProduto(prodId) {
         modalProdQtd.min = "5";
         modalProdQtd.value = "5";
         if (lblProdQtd) {
-            lblProdQtd.textContent = "Quantidade de camisas (mínimo 5):";
+            lblProdQtd.textContent = "Quantidade (mínimo 5):";
         }
     } else {
         modalProdQtd.min = "1";
@@ -114,10 +203,22 @@ function abrirModalProduto(prodId) {
     }
 
     btnsTamanho.forEach(function(btn) {
-        if (btn.getAttribute("data-tamanho") === "M") {
-            btn.classList.add("ativo");
+        const tam = btn.getAttribute("data-tamanho");
+        if (ehBebida) {
+            if (tam === "P") {
+                btn.textContent = produtoAtual.tamanho;
+                btn.classList.add("ativo");
+            } else {
+                btn.style.display = "none";
+            }
         } else {
-            btn.classList.remove("ativo");
+            btn.style.display = "block";
+            btn.textContent = tam;
+            if (tam === "M") {
+                btn.classList.add("ativo");
+            } else {
+                btn.classList.remove("ativo");
+            }
         }
     });
 
@@ -183,6 +284,8 @@ if (btnAddCarrinho) {
 function atualizarCarrinho() {
     let totalItens = 0;
     let totalValor = 0;
+
+    localStorage.setItem("carrinhoPrintShirt", JSON.stringify(carrinho));
 
     carrinhoLista.innerHTML = "";
 
@@ -299,6 +402,16 @@ if (btnCopiarResumo && modalResumoTexto) {
         setTimeout(function() {
             btnCopiarResumo.textContent = "Copiar Mensagem";
         }, 2000);
+    });
+}
+
+//Chamar Whatsapp
+const btnWhatsapp = document.getElementById("btn-whatsapp");
+if (btnWhatsapp && modalResumoTexto) {
+    btnWhatsapp.addEventListener("click", function() {
+        const telefone = "5511987654321";
+        const link = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(modalResumoTexto.value);
+        window.open(link, "_blank");
     });
 }
 

@@ -13,6 +13,7 @@ body {
     line-height: 1.6;
     color: #333333;
     background-color: #f5f5f5;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
@@ -21,6 +22,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background-color 0.3s ease;
 }
 
 .topo {
@@ -46,7 +48,7 @@ header {
 .topo-acoes {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
 }
 
 nav {
@@ -61,8 +63,28 @@ nav a {
     transition: color 0.2s ease;
 }
 
-nav a:hover {
+nav a:hover,
+nav a.ativo {
     color: #e94560;
+}
+
+.btn-tema {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 50%;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-tema:hover {
+    transform: scale(1.15);
+    background-color: rgba(255, 255, 255, 0.12);
 }
 
 .btn-carrinho {
@@ -113,6 +135,7 @@ nav a:hover {
     color: #ffffff;
     padding: 80px 20px;
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .hero-conteudo {
@@ -199,6 +222,7 @@ nav a:hover {
     background-color: #ffffff;
     border-bottom: 1px solid #e5e5e5;
     padding: 25px 20px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .diferenciais-grid {
@@ -237,6 +261,7 @@ section {
     color: #1a1a2e;
     font-size: 30px;
     margin-bottom: 10px;
+    transition: color 0.3s ease;
 }
 
 .secao-subtitulo {
@@ -244,6 +269,128 @@ section {
     color: #666666;
     margin-bottom: 40px;
     font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.card-destaque-promocional {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.card-destaque-promocional:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.destaque-imagem-box {
+    flex: 0 0 380px;
+    min-height: 290px;
+    background-color: #f0f0f5;
+    overflow: hidden;
+}
+
+.destaque-imagem {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.destaque-corpo {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.destaque-info {
+    flex: 1;
+}
+
+.destaque-tag {
+    color: #e94560;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.destaque-titulo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+}
+
+.destaque-descricao {
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.destaque-beneficios {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    color: #333333;
+    font-weight: 500;
+}
+
+.destaque-compra {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    border-left: 1px solid #eeeeee;
+    padding-left: 25px;
+    min-width: 210px;
+    text-align: right;
+}
+
+.destaque-preco-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 16px;
+}
+
+.destaque-preco-de {
+    font-size: 12px;
+    color: #777777;
+}
+
+.destaque-preco-valor {
+    font-size: 32px;
+    font-weight: bold;
+    color: #e94560;
+    line-height: 1.1;
+}
+
+.destaque-preco-obs {
+    font-size: 12px;
+    color: #888888;
+    margin-top: 2px;
+}
+
+.btn-destaque-comprar {
+    padding: 12px 24px;
+    font-size: 15px;
+    white-space: nowrap;
 }
 
 .grid-produtos {
@@ -252,14 +399,38 @@ section {
     gap: 25px;
 }
 
+.ver-todos-container {
+    text-align: center;
+    margin-top: 35px;
+}
+
 .card {
     background-color: #ffffff;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+
+.badge-oferta {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #e94560;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    letter-spacing: 0.5px;
 }
 
 .card-clicavel {
@@ -291,6 +462,7 @@ section {
     font-size: 20px;
     color: #1a1a2e;
     margin-bottom: 8px;
+    transition: color 0.3s ease;
 }
 
 .card-text {
@@ -298,6 +470,7 @@ section {
     color: #666666;
     margin-bottom: 15px;
     flex-grow: 1;
+    transition: color 0.3s ease;
 }
 
 .card-price {
@@ -315,12 +488,13 @@ section {
 
 .passos {
     background-color: #ffffff;
+    transition: background-color 0.3s ease;
 }
 
 .grid-passos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 20px;
 }
 
 .passo {
@@ -344,11 +518,13 @@ section {
     font-size: 18px;
     color: #1a1a2e;
     margin-bottom: 8px;
+    transition: color 0.3s ease;
 }
 
 .passo p {
     font-size: 14px;
     color: #666666;
+    transition: color 0.3s ease;
 }
 
 .modal-overlay {
@@ -380,6 +556,7 @@ section {
     position: relative;
     max-height: 90vh;
     overflow-y: auto;
+    transition: background-color 0.3s ease;
 }
 
 .modal-produto-conteudo {
@@ -408,6 +585,7 @@ section {
     color: #1a1a2e;
     font-size: 24px;
     margin-bottom: 6px;
+    transition: color 0.3s ease;
 }
 
 .prod-preco-container {
@@ -706,6 +884,7 @@ section {
 .contato {
     background-color: #ffffff;
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .contato-caixa {
@@ -726,6 +905,7 @@ footer {
     text-align: center;
     padding: 35px 20px;
     font-size: 14px;
+    transition: background-color 0.3s ease;
 }
 
 footer strong {
@@ -736,6 +916,333 @@ footer p + p {
     margin-top: 8px;
     font-size: 13px;
     color: #999999;
+}
+
+.arte-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.arte-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.arte-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.arte-card:hover {
+    transform: translateY(-4px);
+}
+
+.arte-icone {
+    font-size: 38px;
+    color: #e94560;
+    margin-bottom: 15px;
+}
+
+.arte-card h3 {
+    font-size: 20px;
+    color: #1a1a2e;
+    margin-bottom: 10px;
+}
+
+.arte-card p {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+body.modo-noturno {
+    background-color: #1e1e24;
+    color: #dddddd;
+}
+
+body.modo-noturno header {
+    background-color: #141418;
+}
+
+body.modo-noturno .hero {
+    background-color: #181820;
+}
+
+body.modo-noturno .diferenciais {
+    background-color: #24242e;
+    border-bottom-color: #2f2f3c;
+}
+
+body.modo-noturno .diferencial-item {
+    color: #e0e0e0;
+}
+
+body.modo-noturno .secao-titulo {
+    color: #ffffff;
+}
+
+body.modo-noturno .secao-subtitulo {
+    color: #aaaaaa;
+}
+
+body.modo-noturno .card-destaque-promocional {
+    background-color: #282834;
+    border: 1px solid #363644;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+}
+
+body.modo-noturno .destaque-imagem-box {
+    background-color: #1a1a20;
+}
+
+body.modo-noturno .destaque-titulo {
+    color: #ffffff;
+}
+
+body.modo-noturno .destaque-descricao {
+    color: #bbbbbb;
+}
+
+body.modo-noturno .destaque-beneficios {
+    color: #dddddd;
+}
+
+body.modo-noturno .destaque-compra {
+    border-left-color: #363644;
+}
+
+body.modo-noturno .destaque-preco-de {
+    color: #aaaaaa;
+}
+
+body.modo-noturno .destaque-preco-obs {
+    color: #aaaaaa;
+}
+
+body.modo-noturno .card {
+    background-color: #282834;
+    border: 1px solid #363644;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45);
+}
+
+body.modo-noturno .card-title {
+    color: #ffffff;
+}
+
+body.modo-noturno .card-text {
+    color: #bbbbbb;
+}
+
+body.modo-noturno .preco-avista {
+    color: #aaaaaa;
+}
+
+body.modo-noturno .passos {
+    background-color: #24242e;
+}
+
+body.modo-noturno .passo h3 {
+    color: #ffffff;
+}
+
+body.modo-noturno .passo p {
+    color: #aaaaaa;
+}
+
+body.modo-noturno .arte-card {
+    background-color: #282834;
+    border: 1px solid #363644;
+}
+
+body.modo-noturno .arte-card h3 {
+    color: #ffffff;
+}
+
+body.modo-noturno .arte-card p {
+    color: #bbbbbb;
+}
+
+body.modo-noturno .contato {
+    background-color: #24242e;
+}
+
+body.modo-noturno .contato-info {
+    color: #bbbbbb;
+}
+
+body.modo-noturno footer {
+    background-color: #141418;
+}
+
+body.modo-noturno .modal-conteudo {
+    background-color: #262632;
+    color: #ffffff;
+    border: 1px solid #363644;
+}
+
+body.modo-noturno .modal-fechar {
+    color: #aaaaaa;
+}
+
+body.modo-noturno .modal-fechar:hover {
+    color: #ffffff;
+}
+
+body.modo-noturno .modal-produto-conteudo h3 {
+    color: #ffffff;
+}
+
+body.modo-noturno .prod-preco {
+    color: #ffffff;
+}
+
+body.modo-noturno .prod-descricao {
+    background-color: #1c1c24;
+    color: #cccccc;
+    border-left-color: #e94560;
+}
+
+body.modo-noturno .prod-preview-caixa {
+    background-color: #1c1c24;
+    border-color: #363644;
+}
+
+body.modo-noturno .prod-campo label,
+body.modo-noturno .prod-qtd-linha label {
+    color: #ffffff;
+}
+
+body.modo-noturno .caixa-selecao {
+    background-color: #1c1c24;
+    color: #ffffff;
+    border-color: #3e3e50;
+}
+
+body.modo-noturno .tabela-medidas {
+    color: #aaaaaa;
+}
+
+body.modo-noturno .btn-tamanho {
+    background-color: #1c1c24;
+    color: #ffffff;
+    border-color: #3e3e50;
+}
+
+body.modo-noturno .btn-tamanho:hover {
+    border-color: #ffffff;
+}
+
+body.modo-noturno .btn-tamanho.ativo {
+    background-color: #e94560;
+    border-color: #e94560;
+    color: #ffffff;
+}
+
+body.modo-noturno .prod-qtd-linha input {
+    background-color: #1c1c24;
+    color: #ffffff;
+    border-color: #3e3e50;
+}
+
+body.modo-noturno .carrinho-item {
+    border-bottom-color: #363644;
+}
+
+body.modo-noturno .carrinho-item-img {
+    background-color: #1c1c24;
+}
+
+body.modo-noturno .carrinho-item-titulo {
+    color: #ffffff;
+}
+
+body.modo-noturno .carrinho-item-meta {
+    color: #aaaaaa;
+}
+
+body.modo-noturno .carrinho-rodape {
+    border-top-color: #363644;
+}
+
+body.modo-noturno .carrinho-total-linha {
+    color: #ffffff;
+}
+
+body.modo-noturno .carrinho-aviso-pagamento {
+    color: #aaaaaa;
+}
+
+body.modo-noturno .modal-textarea {
+    background-color: #1c1c24;
+    color: #ffffff;
+    border-color: #3e3e50;
+}
+
+body.modo-noturno .modal-subtitulo {
+    color: #aaaaaa;
+}
+
+body.modo-noturno .modal-telefone {
+    color: #ffffff;
+}
+
+body.modo-noturno .btn-secundario {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+body.modo-noturno .btn-secundario:hover {
+    background-color: #ffffff;
+    color: #1e1e24;
+}
+
+@media (max-width: 860px) {
+    .card-destaque-promocional {
+        flex-direction: column;
+    }
+
+    .destaque-imagem-box {
+        width: 100%;
+        flex: 0 0 240px;
+    }
+
+    .destaque-corpo {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .destaque-compra {
+        border-left: none;
+        border-top: 1px solid #eeeeee;
+        padding-left: 0;
+        padding-top: 20px;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    body.modo-noturno .destaque-compra {
+        border-top-color: #363644;
+    }
+
+    .destaque-preco-box {
+        align-items: center;
+    }
+
+    .btn-destaque-comprar {
+        width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -754,6 +1261,10 @@ footer p + p {
         gap: 12px;
         padding: 20px;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    body.modo-noturno nav {
+        background-color: #141418;
     }
 
     nav.ativo {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrintShirt - Camisetas Personalizadas</title>
+    <title>PrintShirt - Produtos Personalizados</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,10 +14,14 @@
         <div class="topo-acoes">
             <nav id="menu-nav">
                 <a href="#inicio">Início</a>
-                <a href="#produtos">Produtos</a>
+                <a href="produtos.html">Produtos</a>
+                <a href="arte.html">Arte</a>
                 <a href="#como-funciona">Como Funciona</a>
                 <a href="#contato">Contato</a>
             </nav>
+            <button type="button" class="btn-tema" id="btn-tema" aria-label="Alternar modo escuro" title="Modo Noturno">
+                <span id="icone-tema">&#9790;</span>
+            </button>
             <button type="button" class="btn-carrinho" id="btn-carrinho" aria-label="Abrir carrinho">
                 <span class="carrinho-icone">&#128722;</span>
                 <span class="carrinho-contador" id="carrinho-contador">0</span>
@@ -29,19 +33,19 @@
 
 <div class="hero" id="inicio">
     <div class="hero-conteudo">
-        <h2>Sua Criatividade em Tecido</h2>
-        <p>Camisetas personalizadas de alta qualidade, confeccionadas do seu jeito com acabamento profissional.</p>
+        <h2>Sua Criatividade em Peças Personalizadas</h2>
+        <p>Produtos de alta qualidade confeccionados do seu jeito, com acabamento impecável e entrega ágil.</p>
         <div class="hero-botoes">
             <a href="#produtos" class="btn">Conhecer Produtos</a>
-            <a href="#como-funciona" class="btn btn-secundario">Como Funciona</a>
+            <a href="produtos.html" class="btn btn-secundario">Catálogo Completo</a>
         </div>
     </div>
 </div>
 
 <div class="diferenciais">
     <div class="diferenciais-grid">
-        <div class="diferencial-item"><span class="diferencial-icone">&#10003;</span> 100% Algodão Penteado</div>
-        <div class="diferencial-item"><span class="diferencial-icone">&#10003;</span> Estampa em DTF Durável</div>
+        <div class="diferencial-item"><span class="diferencial-icone">&#10003;</span> Acabamento Premium</div>
+        <div class="diferencial-item"><span class="diferencial-icone">&#10003;</span> Linha Têxtil e Bebidas</div>
         <div class="diferencial-item"><span class="diferencial-icone">&#10003;</span> Pagamento Somente à Vista</div>
         <div class="diferencial-item"><span class="diferencial-icone">&#10003;</span> Sem Quantidade Mínima</div>
     </div>
@@ -49,50 +53,38 @@
 
 <section id="produtos">
     <div class="container">
-        <h2 class="secao-titulo">Produtos em Destaque</h2>
-        <p class="secao-subtitulo">Clique no produto para customizar cor, tamanho e quantidade</p>
-        <div class="grid-produtos">
-            <div class="card card-clicavel" data-id="basica">
-                <img src="assets/camiseta.jpg" alt="Camiseta básica personalizada">
-                <div class="card-body">
-                    <div>
-                        <div class="card-title">Básica Individual</div>
-                        <div class="card-text">1 camiseta 100% algodão personalizada com sua arte, foto ou frase exclusiva.</div>
-                    </div>
-                    <div>
-                        <div class="card-price">R$ 45,00 <span class="preco-avista">à vista</span></div>
-                        <button type="button" class="btn btn-pequeno">Customizar e Pedir</button>
+        <h2 class="secao-titulo">Produto em Destaque</h2>
+        <p class="secao-subtitulo">Aproveite nossa condição especial para pedidos em quantidade</p>
+        
+        <div class="card-destaque-promocional card-clicavel" data-id="empresas">
+            <div class="badge-oferta">&#128293; OFERTA</div>
+            <div class="destaque-imagem-box">
+                <img src="assets/camisetas-empresas.jpg" alt="Pacote Promocional Empresas e Eventos" class="destaque-imagem">
+            </div>
+            <div class="destaque-corpo">
+                <div class="destaque-info">
+                    <span class="destaque-tag">Pacote Especial</span>
+                    <h3 class="destaque-titulo">Empresas e Eventos</h3>
+                    <p class="destaque-descricao">Camisetas de alta durabilidade e acabamento premium para sua equipe, empresa ou formatura. Peças confortáveis prontas para receber sua identidade visual.</p>
+                    <div class="destaque-beneficios">
+                        <div>&#10003; 5 camisas por apenas R$ 40,00 cada</div>
+                        <div>&#10003; Camisas adicionais por apenas R$ 35,00 cada</div>
+                        <div>&#10003; Pagamento somente à vista com desconto garantido</div>
                     </div>
                 </div>
+                <div class="destaque-compra">
+                    <div class="destaque-preco-box">
+                        <span class="destaque-preco-de">A partir de</span>
+                        <span class="destaque-preco-valor">R$ 200,00</span>
+                        <span class="destaque-preco-obs">mínimo 5 camisas (à vista)</span>
+                    </div>
+                    <button type="button" class="btn btn-destaque-comprar">Customizar e Pedir</button>
+                </div>
             </div>
+        </div>
 
-            <div class="card card-clicavel" data-id="kit">
-                <img src="assets/camiseta3.jpg" alt="Kit de camisetas personalizadas">
-                <div class="card-body">
-                    <div>
-                        <div class="card-title">Kit 3 Camisetas</div>
-                        <div class="card-text">Kit com 3 camisetas personalizadas, perfeito para presentes, casais ou amigos.</div>
-                    </div>
-                    <div>
-                        <div class="card-price">R$ 120,00 <span class="preco-avista">à vista</span></div>
-                        <button type="button" class="btn btn-pequeno">Customizar e Pedir</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card card-clicavel" data-id="empresas">
-                <img src="assets/camisetas-empresas.jpg" alt="Camisetas para empresas e eventos">
-                <div class="card-body">
-                    <div>
-                        <div class="card-title">Empresas e Eventos</div>
-                        <div class="card-text">Preço promocional: a partir de 5 camisas por R$ 40,00 cada e R$ 35,00 cada adicional.</div>
-                    </div>
-                    <div>
-                        <div class="card-price">A partir de R$ 200,00 <span class="preco-avista">(mín. 5 camisas)</span></div>
-                        <button type="button" class="btn btn-pequeno">Customizar e Pedir</button>
-                    </div>
-                </div>
-            </div>
+        <div class="ver-todos-container">
+            <a href="produtos.html" class="btn btn-secundario">Ver todos os produtos</a>
         </div>
     </div>
 </section>
@@ -100,12 +92,12 @@
 <section id="como-funciona" class="passos">
     <div class="container">
         <h2 class="secao-titulo">Como Funciona</h2>
-        <p class="secao-subtitulo">Processo simples e direto para pedir sua estampa</p>
+        <p class="secao-subtitulo">Processo simples e direto para pedir seu produto personalizado</p>
         <div class="grid-passos">
             <div class="passo">
                 <div class="numero">1</div>
                 <h3>Escolha</h3>
-                <p>Abra o produto e selecione a cor, tamanho e quantidade.</p>
+                <p>Selecione seu modelo, cor, tamanho e quantidade.</p>
             </div>
             <div class="passo">
                 <div class="numero">2</div>
@@ -119,6 +111,11 @@
             </div>
             <div class="passo">
                 <div class="numero">4</div>
+                <h3>Arte</h3>
+                <p>Envie ou encomende sua arte com nossa equipe.</p>
+            </div>
+            <div class="passo">
+                <div class="numero">5</div>
                 <h3>Receba</h3>
                 <p>Envie o resumo copiado ao numero na tela e converse com nosso agente de vendas</p>
             </div>
@@ -129,14 +126,14 @@
 <div id="modal-produto" class="modal-overlay">
     <div class="modal-conteudo modal-produto-conteudo">
         <button type="button" class="modal-fechar" id="btn-fechar-modal-produto" aria-label="Fechar">&times;</button>
-        <h3 id="modal-prod-nome">Camiseta Básica</h3>
+        <h3 id="modal-prod-nome">Produto</h3>
         <div class="prod-preco-container">
-            <span class="prod-preco" id="modal-prod-preco">R$ 45,00</span>
+            <span class="prod-preco" id="modal-prod-preco">R$ 0,00</span>
             <span class="prod-condicao">à vista</span>
         </div>
         <div class="prod-descricao" id="modal-prod-descricao">Descrição do produto</div>
         <div class="prod-preview-caixa">
-            <img id="modal-prod-img" src="assets/camiseta.jpg" alt="Preview da camiseta">
+            <img id="modal-prod-img" src="assets/camiseta.jpg" alt="Preview do produto">
         </div>
         <div class="prod-campo">
             <label for="modal-prod-cor">Cor:</label>
@@ -150,10 +147,10 @@
         </div>
         <div class="prod-campo">
             <div class="tamanho-cabecalho">
-                <label>Tamanho</label>
+                <label>Tamanho / Capacidade</label>
                 <span class="tabela-medidas">Tabela de medidas</span>
             </div>
-            <div class="tamanho-grade">
+            <div class="tamanho-grade" id="grade-tamanho">
                 <button type="button" class="btn-tamanho" data-tamanho="P">P</button>
                 <button type="button" class="btn-tamanho ativo" data-tamanho="M">M</button>
                 <button type="button" class="btn-tamanho" data-tamanho="G">G</button>
@@ -195,6 +192,7 @@
         <div class="modal-telefone">Telefone para contato: <strong>(11) 98765-4321</strong></div>
         <div class="modal-botoes">
             <button type="button" id="btn-copiar" class="btn">Copiar Mensagem</button>
+            <button type="button" id="btn-whatsapp" class="btn btn-secundario">Chamar no WhatsApp</button>
         </div>
     </div>
 </div>
@@ -215,7 +213,7 @@
 </section>
 
 <footer>
-    <p><strong>PrintShirt</strong> - Camisetas Personalizadas</p>
+    <p><strong>PrintShirt</strong> - Produtos Personalizados</p>
     <p>&copy; 2026 PrintShirt. Todos os direitos reservados.</p>
 </footer>
 
