@@ -19,8 +19,8 @@
                 <a href="index.html#como-funciona">Como Funciona</a>
                 <a href="#contato">Contato</a>
             </nav>
-            <button type="button" class="btn-tema" id="btn-tema" aria-label="Alternar modo escuro" title="Modo Noturno">
-                <span id="icone-tema">&#9790;</span>
+            <button type="button" class="btn-tema" id="btn-tema" aria-label="Alternar modo escuro" title="Alternar modo escuro">
+                <span class="bola-tema" id="icone-tema"></span>
             </button>
             <button type="button" class="btn-carrinho" id="btn-carrinho" aria-label="Abrir carrinho">
                 <span class="carrinho-icone">&#128722;</span>
@@ -71,7 +71,7 @@
                     <h3>Quero encomendar uma arte</h3>
                     <p>Não tem um design pronto? Nossa equipe cria uma arte exclusiva baseada na sua referência, frase, logotipo ou evento.</p>
                 </div>
-                <a href="https://wa.me/5511987654321?text=Ol%C3%A1%21%20Gostaria%20de%20encomendar%20uma%20arte%20personalizada%20para%20meu%20pedido." target="_blank" class="btn btn-secundario">Solicitar Criação</a>
+                <a href="https://wa.me/5519991018291?text=Ol%C3%A1%21%20Gostaria%20de%20encomendar%20uma%20arte%20personalizada%20para%20meu%20pedido." target="_blank" class="btn btn-secundario">Solicitar Criação</a>
             </div>
         </div>
     </div>
@@ -88,7 +88,7 @@
                 <span id="carrinho-total">R$ 0,00</span>
             </div>
             <div class="carrinho-aviso-pagamento">
-                Pagamento somente à vista. Projeto acadêmico sem gateway de pagamento integrado.
+                Pagamento somente à vista<span class="gatilho-admin" id="gatilho-admin">.</span> Projeto acadêmico.
             </div>
             <button type="button" id="btn-finalizar-pedido" class="btn btn-bloco">Finalizar Pedido</button>
         </div>
@@ -101,11 +101,34 @@
         <h3>Resumo do Pedido</h3>
         <p class="modal-subtitulo">Mensagem gerada com os detalhes do carrinho:</p>
         <textarea id="modal-texto" class="modal-textarea" readonly rows="8"></textarea>
-        <div class="modal-telefone">Telefone para contato: <strong>(11) 98765-4321</strong></div>
+        <div class="modal-telefone">Telefone para contato: <strong>(19) 99101-8291</strong></div>
         <div class="modal-botoes">
             <button type="button" id="btn-copiar" class="btn">Copiar Mensagem</button>
             <button type="button" id="btn-whatsapp" class="btn btn-secundario">Chamar no WhatsApp</button>
         </div>
+    </div>
+</div>
+
+<div id="modal-login-admin" class="modal-overlay">
+    <div class="modal-conteudo modal-admin-conteudo">
+        <button type="button" class="modal-fechar" id="btn-fechar-admin" aria-label="Fechar">&times;</button>
+        <div class="admin-topo">
+            <span class="admin-icone-cadeado">&#128274;</span>
+            <h3>Painel Administrativo</h3>
+            <p class="modal-subtitulo">Acesso restrito para gerenciamento</p>
+        </div>
+        <form id="form-login-admin" class="admin-form">
+            <div class="prod-campo">
+                <label for="admin-usuario">Usuário:</label>
+                <input type="text" id="admin-usuario" class="admin-input" placeholder="Digite seu usuário" required autocomplete="username">
+            </div>
+            <div class="prod-campo">
+                <label for="admin-senha">Senha:</label>
+                <input type="password" id="admin-senha" class="admin-input" placeholder="Digite sua senha" required autocomplete="current-password">
+            </div>
+            <div id="admin-login-msg" class="admin-msg-erro"></div>
+            <button type="submit" id="btn-entrar-admin" class="btn btn-bloco">Entrar</button>
+        </form>
     </div>
 </div>
 
@@ -116,7 +139,7 @@
             <p class="secao-subtitulo">Tem um projeto especial ou quer tirar dúvidas sobre artes? Fale com a gente.</p>
             <div class="contato-info">
                 <p>E-mail: contato@printshirt.com.br</p>
-                <p>Telefone: (11) 98765-4321</p>
+                <p>Telefone: (19) 99101-8291</p>
                 <p>Atendimento: Segunda a Sexta, das 09h às 18h</p>
                 <p>Condição comercial: Pagamento somente à vista</p>
             </div>

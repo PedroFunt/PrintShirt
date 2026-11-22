@@ -3,8 +3,9 @@ let produtoAtual = {
     id: "empresas",
     nome: "Empresas e Eventos",
     imagem: "assets/camisetas-empresas.jpg",
-    cor: "Preto",
+    cor: "Branco",
     tamanho: "M",
+    personalizacao: "Com Personalização",
     quantidade: 5
 };
 
@@ -14,7 +15,7 @@ const dadosProdutos = {
         imagem: "assets/camisetas-empresas.jpg",
         minQtd: 5,
         padraoQtd: 5,
-        descricao: "Preço promocional: Pedido mínimo de 5 camisas por R$ 40,00 cada. Cada camisa adicional acima de 5 custará apenas R$ 35,00. Ideal para equipes, empresas, eventos e formaturas."
+        descricao: "Preço promocional: Pedido mínimo de 5 camisas por R$ 40,00 cada. Cada camisa adicional acima de 5 custará apenas R$ 35,00. Promoção válida mediante apresentação do CNPJ da empresa."
     },
     basica: {
         nome: "Camiseta Básica Individual",
@@ -85,19 +86,43 @@ const precosUnitarios = {
     copo: 69
 };
 
+const mapaCores = {
+    "Branco": { bg: "#ffffff", border: "#cccccc" },
+    "Preto": { bg: "#1a1a2e", border: "#333333" },
+    "Azul": { bg: "#2563eb", border: "#1d4ed8" },
+    "Cinza": { bg: "#6b7280", border: "#4b5563" },
+    "Vermelho": { bg: "#dc2626", border: "#b91c1c" }
+};
+
+function atualizarIndicadorCor(cor) {
+    const ponto = document.getElementById("preview-ponto-cor");
+    const texto = document.getElementById("preview-legenda-texto");
+    if (!ponto || !texto) return;
+
+    const infoCor = mapaCores[cor] || { bg: "#ffffff", border: "#cccccc" };
+    ponto.style.backgroundColor = infoCor.bg;
+    ponto.style.borderColor = infoCor.border;
+
+    if (cor === "Branco") {
+        texto.textContent = "Visualização da Peça";
+    } else {
+        texto.textContent = "Cor Selecionada: " + cor;
+    }
+}
+
 const btnTema = document.getElementById("btn-tema");
 const iconeTema = document.getElementById("icone-tema");
 
 function aplicarTema(escuro) {
     if (escuro) {
         document.body.classList.add("modo-noturno");
-        if (iconeTema) {
-            iconeTema.innerHTML = "&#9728;";
+        if (btnTema) {
+            btnTema.title = "Ativar Modo Claro";
         }
     } else {
         document.body.classList.remove("modo-noturno");
-        if (iconeTema) {
-            iconeTema.innerHTML = "&#9790;";
+        if (btnTema) {
+            btnTema.title = "Ativar Modo Noturno";
         }
     }
 }
@@ -133,6 +158,8 @@ const modalProdQtd = document.getElementById("modal-prod-qtd");
 const lblProdQtd = document.getElementById("lbl-prod-qtd");
 const gradeTamanho = document.getElementById("grade-tamanho");
 const btnsTamanho = document.querySelectorAll(".btn-tamanho");
+const campoPersonalizacao = document.getElementById("campo-personalizacao");
+const btnsPersonalizacao = document.querySelectorAll(".btn-personalizacao");
 const btnAddCarrinho = document.getElementById("btn-add-carrinho");
 
 const modalResumo = document.getElementById("modal-orcamento");
@@ -144,6 +171,12 @@ const cardsProdutos = document.querySelectorAll(".card-clicavel");
 const menuToggle = document.getElementById("menu-toggle");
 const menuNav = document.getElementById("menu-nav");
 const linksNav = document.querySelectorAll("#menu-nav a");
+
+const gatilhoAdmin = document.getElementById("gatilho-admin");
+const modalLoginAdmin = document.getElementById("modal-login-admin");
+const btnFecharAdmin = document.getElementById("btn-fechar-admin");
+const formLoginAdmin = document.getElementById("form-login-admin");
+const adminLoginMsg = document.getElementById("admin-login-msg");
 
 function calcularPreco(prodId, quantidade) {
     if (prodId === "empresas") {
@@ -173,7 +206,11 @@ function abrirModalProduto(prodId) {
     produtoAtual.id = prodId;
     produtoAtual.nome = info.nome;
     produtoAtual.imagem = info.imagem;
-    produtoAtual.cor = modalProdCor.value;
+    if (modalProdCor) {
+        modalProdCor.value = "Branco";
+    }
+    produtoAtual.cor = "Branco";
+    atualizarIndicadorCor("Branco");
 
     const ehBebida = prodId === "caneca" || prodId === "taca" || prodId === "copo";
     if (ehBebida) {
@@ -189,12 +226,27 @@ function abrirModalProduto(prodId) {
     modalProdImg.src = info.imagem;
 
     if (prodId === "empresas") {
+        if (campoPersonalizacao) {
+            campoPersonalizacao.style.display = "none";
+        }
+        produtoAtual.personalizacao = "Com Personalização (Obrigatório)";
         modalProdQtd.min = "5";
         modalProdQtd.value = "5";
         if (lblProdQtd) {
             lblProdQtd.textContent = "Quantidade (mínimo 5):";
         }
     } else {
+        if (campoPersonalizacao) {
+            campoPersonalizacao.style.display = "block";
+        }
+        produtoAtual.personalizacao = "Com Personalização";
+        btnsPersonalizacao.forEach(function(b) {
+            if (b.getAttribute("data-personalizacao") === "Com Personalização") {
+                b.classList.add("ativo");
+            } else {
+                b.classList.remove("ativo");
+            }
+        });
         modalProdQtd.min = "1";
         modalProdQtd.value = "1";
         if (lblProdQtd) {
@@ -243,9 +295,20 @@ btnsTamanho.forEach(function(btn) {
     });
 });
 
+btnsPersonalizacao.forEach(function(btn) {
+    btn.addEventListener("click", function() {
+        btnsPersonalizacao.forEach(function(b) {
+            b.classList.remove("ativo");
+        });
+        btn.classList.add("ativo");
+        produtoAtual.personalizacao = btn.getAttribute("data-personalizacao");
+    });
+});
+
 if (modalProdCor) {
     modalProdCor.addEventListener("change", function() {
         produtoAtual.cor = modalProdCor.value;
+        atualizarIndicadorCor(modalProdCor.value);
     });
 }
 
@@ -272,6 +335,7 @@ if (btnAddCarrinho) {
             imagem: produtoAtual.imagem,
             cor: modalProdCor.value,
             tamanho: produtoAtual.tamanho || "M",
+            personalizacao: produtoAtual.personalizacao || "Com Personalização",
             quantidade: qtd
         });
 
@@ -304,13 +368,14 @@ function atualizarCarrinho() {
             totalValor += item.preco;
 
             const rotuloQtd = item.id === "empresas" ? item.quantidade + " camisas" : "Qtd: " + item.quantidade;
+            const persRotulo = item.personalizacao ? " | " + item.personalizacao : "";
 
             const divItem = document.createElement("div");
             divItem.className = "carrinho-item";
             divItem.innerHTML = '<img src="' + item.imagem + '" class="carrinho-item-img" alt="' + item.nome + '">' +
                 '<div class="carrinho-item-detalhes">' +
                     '<div class="carrinho-item-titulo">' + item.nome + '</div>' +
-                    '<div class="carrinho-item-meta">Cor: ' + item.cor + ' | Tam: ' + item.tamanho + ' | ' + rotuloQtd + '</div>' +
+                    '<div class="carrinho-item-meta">Cor: ' + item.cor + ' | Tam: ' + item.tamanho + persRotulo + ' | ' + rotuloQtd + '</div>' +
                     '<div class="carrinho-item-preco">R$ ' + item.preco.toFixed(2).replace(".", ",") + ' à vista</div>' +
                 '</div>' +
                 '<button type="button" class="btn-remover-item" data-index="' + index + '" aria-label="Remover item">&times;</button>';
@@ -379,8 +444,9 @@ if (btnFinalizarPedido) {
         carrinho.forEach(function(item, i) {
             valorTotal += item.preco;
             const qtdTexto = item.id === "empresas" ? item.quantidade + " camisas" : item.quantidade + " un";
+            const persTexto = item.personalizacao ? " | " + item.personalizacao : "";
             textoPedido += (i + 1) + ". " + item.nome + "\n" +
-                "   Cor: " + item.cor + " | Tamanho: " + item.tamanho + "\n" +
+                "   Cor: " + item.cor + " | Tamanho: " + item.tamanho + persTexto + "\n" +
                 "   Quantidade: " + qtdTexto + " | Subtotal: R$ " + item.preco.toFixed(2).replace(".", ",") + "\n\n";
         });
 
@@ -409,7 +475,7 @@ if (btnCopiarResumo && modalResumoTexto) {
 const btnWhatsapp = document.getElementById("btn-whatsapp");
 if (btnWhatsapp && modalResumoTexto) {
     btnWhatsapp.addEventListener("click", function() {
-        const telefone = "5511987654321";
+        const telefone = "5519991018291";
         const link = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(modalResumoTexto.value);
         window.open(link, "_blank");
     });
@@ -426,6 +492,73 @@ if (modalResumo) {
         if (e.target === modalResumo) {
             modalResumo.classList.remove("ativo");
         }
+    });
+}
+
+if (gatilhoAdmin && modalLoginAdmin) {
+    gatilhoAdmin.addEventListener("click", function(e) {
+        e.stopPropagation();
+        if (modalCarrinho) {
+            modalCarrinho.classList.remove("ativo");
+        }
+        modalLoginAdmin.classList.add("ativo");
+        const inputUsuario = document.getElementById("admin-usuario");
+        if (inputUsuario) {
+            inputUsuario.focus();
+        }
+    });
+}
+
+if (btnFecharAdmin && modalLoginAdmin) {
+    btnFecharAdmin.addEventListener("click", function() {
+        modalLoginAdmin.classList.remove("ativo");
+        if (adminLoginMsg) {
+            adminLoginMsg.textContent = "";
+        }
+    });
+}
+
+if (modalLoginAdmin) {
+    modalLoginAdmin.addEventListener("click", function(e) {
+        if (e.target === modalLoginAdmin) {
+            modalLoginAdmin.classList.remove("ativo");
+            if (adminLoginMsg) {
+                adminLoginMsg.textContent = "";
+            }
+        }
+    });
+}
+
+if (formLoginAdmin) {
+    formLoginAdmin.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const usuario = document.getElementById("admin-usuario").value;
+        const senha = document.getElementById("admin-senha").value;
+
+        fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ usuario: usuario, senha: senha })
+        }).then(function(resp) {
+            if (resp.ok) {
+                return resp.json().then(function(data) {
+                    if (adminLoginMsg) {
+                        adminLoginMsg.style.color = "#27ae60";
+                        adminLoginMsg.textContent = "Login autorizado com sucesso!";
+                    }
+                });
+            } else {
+                if (adminLoginMsg) {
+                    adminLoginMsg.style.color = "#e94560";
+                    adminLoginMsg.textContent = "Usuário ou senha incorretos.";
+                }
+            }
+        }).catch(function() {
+            if (adminLoginMsg) {
+                adminLoginMsg.style.color = "#e94560";
+                adminLoginMsg.textContent = "Aguardando configuração do endpoint de autenticação.";
+            }
+        });
     });
 }
 

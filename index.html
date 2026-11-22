@@ -19,8 +19,8 @@
                 <a href="#como-funciona">Como Funciona</a>
                 <a href="#contato">Contato</a>
             </nav>
-            <button type="button" class="btn-tema" id="btn-tema" aria-label="Alternar modo escuro" title="Modo Noturno">
-                <span id="icone-tema">&#9790;</span>
+            <button type="button" class="btn-tema" id="btn-tema" aria-label="Alternar modo escuro" title="Alternar modo escuro">
+                <span class="bola-tema" id="icone-tema"></span>
             </button>
             <button type="button" class="btn-carrinho" id="btn-carrinho" aria-label="Abrir carrinho">
                 <span class="carrinho-icone">&#128722;</span>
@@ -65,7 +65,7 @@
                 <div class="destaque-info">
                     <span class="destaque-tag">Pacote Especial</span>
                     <h3 class="destaque-titulo">Empresas e Eventos</h3>
-                    <p class="destaque-descricao">Camisetas de alta durabilidade e acabamento premium para sua equipe, empresa ou formatura. Peças confortáveis prontas para receber sua identidade visual.</p>
+                    <p class="destaque-descricao">Camisetas de alta durabilidade e acabamento premium para sua equipe, empresa ou formatura. Peças confortáveis prontas para receber sua identidade visual. Promoção válida mediante apresentação do CNPJ da empresa.</p>
                     <div class="destaque-beneficios">
                         <div>&#10003; 5 camisas por apenas R$ 40,00 cada</div>
                         <div>&#10003; Camisas adicionais por apenas R$ 35,00 cada</div>
@@ -131,16 +131,21 @@
             <span class="prod-preco" id="modal-prod-preco">R$ 0,00</span>
             <span class="prod-condicao">à vista</span>
         </div>
-        <div class="prod-descricao" id="modal-prod-descricao">Descrição do produto</div>
         <div class="prod-preview-caixa">
+            <span class="preview-badge-topo">&#10024; Foto Oficial</span>
             <img id="modal-prod-img" src="assets/camiseta.jpg" alt="Preview do produto">
+            <div class="preview-legenda">
+                <span class="preview-ponto" id="preview-ponto-cor"></span>
+                <span id="preview-legenda-texto">Visualização da Peça</span>
+            </div>
         </div>
+        <div class="prod-descricao" id="modal-prod-descricao">Descrição do produto</div>
         <div class="prod-campo">
             <label for="modal-prod-cor">Cor:</label>
             <select id="modal-prod-cor" class="caixa-selecao">
-                <option value="Branco">Branco</option>
+                <option value="Branco" selected>Branco</option>
                 <option value="Azul">Azul</option>
-                <option value="Preto" selected>Preto</option>
+                <option value="Preto">Preto</option>
                 <option value="Cinza">Cinza</option>
                 <option value="Vermelho">Vermelho</option>
             </select>
@@ -155,6 +160,13 @@
                 <button type="button" class="btn-tamanho ativo" data-tamanho="M">M</button>
                 <button type="button" class="btn-tamanho" data-tamanho="G">G</button>
                 <button type="button" class="btn-tamanho" data-tamanho="GG">GG</button>
+            </div>
+        </div>
+        <div class="prod-campo" id="campo-personalizacao">
+            <label>Personalização:</label>
+            <div class="personalizacao-grade" id="grade-personalizacao">
+                <button type="button" class="btn-personalizacao ativo" data-personalizacao="Com Personalização">Com Personalização</button>
+                <button type="button" class="btn-personalizacao" data-personalizacao="Sem Personalização">Sem Personalização</button>
             </div>
         </div>
         <div class="prod-qtd-linha">
@@ -176,7 +188,7 @@
                 <span id="carrinho-total">R$ 0,00</span>
             </div>
             <div class="carrinho-aviso-pagamento">
-                Pagamento somente à vista. Projeto acadêmico sem gateway de pagamento integrado.
+                Pagamento somente à vista<span class="gatilho-admin" id="gatilho-admin">.</span> Projeto acadêmico.
             </div>
             <button type="button" id="btn-finalizar-pedido" class="btn btn-bloco">Finalizar Pedido</button>
         </div>
@@ -189,11 +201,34 @@
         <h3>Resumo do Pedido</h3>
         <p class="modal-subtitulo">Mensagem gerada com os detalhes do carrinho:</p>
         <textarea id="modal-texto" class="modal-textarea" readonly rows="8"></textarea>
-        <div class="modal-telefone">Telefone para contato: <strong>(11) 98765-4321</strong></div>
+        <div class="modal-telefone">Telefone para contato: <strong>(19) 99101-8291</strong></div>
         <div class="modal-botoes">
             <button type="button" id="btn-copiar" class="btn">Copiar Mensagem</button>
             <button type="button" id="btn-whatsapp" class="btn btn-secundario">Chamar no WhatsApp</button>
         </div>
+    </div>
+</div>
+
+<div id="modal-login-admin" class="modal-overlay">
+    <div class="modal-conteudo modal-admin-conteudo">
+        <button type="button" class="modal-fechar" id="btn-fechar-admin" aria-label="Fechar">&times;</button>
+        <div class="admin-topo">
+            <span class="admin-icone-cadeado">&#128274;</span>
+            <h3>Painel Administrativo</h3>
+            <p class="modal-subtitulo">Acesso restrito para gerenciamento</p>
+        </div>
+        <form id="form-login-admin" class="admin-form">
+            <div class="prod-campo">
+                <label for="admin-usuario">Usuário:</label>
+                <input type="text" id="admin-usuario" class="admin-input" placeholder="Digite seu usuário" required autocomplete="username">
+            </div>
+            <div class="prod-campo">
+                <label for="admin-senha">Senha:</label>
+                <input type="password" id="admin-senha" class="admin-input" placeholder="Digite sua senha" required autocomplete="current-password">
+            </div>
+            <div id="admin-login-msg" class="admin-msg-erro"></div>
+            <button type="submit" id="btn-entrar-admin" class="btn btn-bloco">Entrar</button>
+        </form>
     </div>
 </div>
 
@@ -204,7 +239,7 @@
             <p class="secao-subtitulo">Tem um projeto especial ou quer tirar dúvidas? Fale com a gente.</p>
             <div class="contato-info">
                 <p>E-mail: contato@printshirt.com.br</p>
-                <p>Telefone: (11) 98765-4321</p>
+                <p>Telefone: (19) 99101-8291</p>
                 <p>Atendimento: Segunda a Sexta, das 09h às 18h</p>
                 <p>Condição comercial: Pagamento somente à vista</p>
             </div>
